@@ -10,9 +10,9 @@ namespace BandManagerApp.DataContexsts
 {
     public class BandList : DbContext
     {
-        public List<Band> List { get; set; }
+        public DbSet<Band> List { get; set; }
 
-        public BandList() : base ("Bands")
+        public BandList() : base("Bands")
         { }
     }
 }

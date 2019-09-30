@@ -19,5 +19,17 @@ namespace BandManagerApp.DataEntities
         public DateTime IssueDate { get; set; }
 
         public string Band { get; set; }
+
+        public Song(string Name, string MusicAuthor, string TextAuthor, string IssueDate, string Band)
+        {
+            this.Name = Name;
+            this.MusicAuthor = MusicAuthor;
+            this.TextAuthor = TextAuthor;
+            this.IssueDate = Convert.ToDateTime(IssueDate);
+            this.Band = Band;
+        }
+
+        public Song()
+        { }
     }
 }

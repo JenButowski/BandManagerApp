@@ -19,5 +19,17 @@ namespace BandManagerApp.DataEntities
         public string PlayGenre { get; set; }
 
         public int Rate { get; set; }
+
+        public Band(string Name, string DateofCreation, string Country, string PlayGenre, int Rate)
+        {
+            this.Name = Name;
+            this.DateofCreation = Convert.ToDateTime(DateofCreation);
+            this.Country = Country;
+            this.PlayGenre = PlayGenre;
+            this.Rate = Rate;
+        }
+
+        public Band()
+        { }
     }
 }

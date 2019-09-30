@@ -15,5 +15,15 @@ namespace BandManagerApp.DataEntities
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        public Concert(string City, string StartDate, string EndDate)
+        {
+            this.City = City;
+            this.StartDate = Convert.ToDateTime(StartDate);
+            this.EndDate = Convert.ToDateTime(EndDate);
+        }
+
+        public Concert()
+        { }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BandManagerApp.DataContexsts;
+using BandManagerApp.DataEntities;
 
 namespace BandManagerApp
 {
@@ -10,6 +12,15 @@ namespace BandManagerApp
     {
         static void Main(string[] args)
         {
+            using (var bandlist = new BandList())
+            {
+                foreach (var band in bandlist.List)
+                {
+                    Console.WriteLine($"{band.Name} {band.PlayGenre} {band.Rate}");
+                }
+                Console.WriteLine("Complete");
+            }
+            Console.ReadLine();
         }
     }
 }
