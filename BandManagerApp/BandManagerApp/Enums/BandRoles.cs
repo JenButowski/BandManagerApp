@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BandManagerApp.Enums
 {
-    enum BandRoles
+    public enum BandRoles
     {
         Singer = 0,
 

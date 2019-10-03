@@ -16,7 +16,7 @@ namespace BandManagerApp
             {
                 foreach (var band in bandlist.List)
                 {
-                    Console.WriteLine($"{band.Name} {band.PlayGenre} {band.Rate}");
+                    Console.WriteLine($"{band.Name} {band.PlayGenre} {band.Rate} {band.Musicians.FirstOrDefault().BandRole}");
                 }
                 Console.WriteLine("Complete");
             }

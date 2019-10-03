@@ -18,6 +18,8 @@ namespace BandManagerApp.DataEntities
 
         public string PlayGenre { get; set; }
 
+        public List<Musician> Musicians { get; set; } = new List<Musician>();
+
         public int Rate { get; set; }
 
         public Band(string Name, string DateofCreation, string Country, string PlayGenre, int Rate)

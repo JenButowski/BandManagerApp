@@ -15,7 +15,5 @@ namespace BandManagerApp
         public string Surname { get; set; }
 
         public List<Band> Bands { get; } = new List<Band>();
-
-        public List
     }
 }

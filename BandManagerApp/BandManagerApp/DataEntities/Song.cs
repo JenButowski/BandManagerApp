@@ -12,15 +12,15 @@ namespace BandManagerApp.DataEntities
 
         public string Name { get; set; }
 
-        public string MusicAuthor { get; set; }
+        public Musician MusicAuthor { get; set; }
 
-        public string TextAuthor { get; set; }
+        public Musician TextAuthor { get; set; }
 
         public DateTime IssueDate { get; set; }
 
         public string Band { get; set; }
 
-        public Song(string Name, string MusicAuthor, string TextAuthor, string IssueDate, string Band)
+        public Song(string Name, Musician MusicAuthor, Musician TextAuthor, string IssueDate, string Band)
         {
             this.Name = Name;
             this.MusicAuthor = MusicAuthor;

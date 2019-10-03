@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="DataContexsts\BandList.cs" />
     <Compile Include="DataContexsts\ConcertList.cs" />
+    <Compile Include="DataContexsts\MusicianList.cs" />
     <Compile Include="DataContexsts\SongList.cs" />
     <Compile Include="DataEntities\Band.cs" />
     <Compile Include="DataEntities\Musician.cs" />
