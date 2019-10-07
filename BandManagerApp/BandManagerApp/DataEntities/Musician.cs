@@ -11,12 +11,14 @@ namespace BandManagerApp.DataEntities
     {
         public int Id { get; set; }
 
-        public int BandId { get; set; }
-
         public string Name { get; set; }
 
         public string Surname { get; set; }
 
         public BandRoles BandRole { get; set; }
+
+        public int? BandId { get; set; }
+
+        public Band Band { get; set; }
     }
 }

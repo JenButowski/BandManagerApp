@@ -53,15 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContexsts\BandList.cs" />
-    <Compile Include="DataContexsts\ConcertList.cs" />
-    <Compile Include="DataContexsts\MusicianList.cs" />
-    <Compile Include="DataContexsts\SongList.cs" />
+    <Compile Include="DataContexsts\DBContext.cs" />
     <Compile Include="DataEntities\Band.cs" />
     <Compile Include="DataEntities\Musician.cs" />
     <Compile Include="DataEntities\Song.cs" />
     <Compile Include="DataEntities\Concert.cs" />
+    <Compile Include="DataEntities\Tour.cs" />
     <Compile Include="Enums\BandRoles.cs" />
+    <Compile Include="Enums\DataInstances.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

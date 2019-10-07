@@ -12,14 +12,13 @@ namespace BandManagerApp
     {
         static void Main(string[] args)
         {
-            using (var bandlist = new BandList())
+            var concerts = DBContext.GetInstanceList(Enums.DataInstances.Bands);
+            foreach(Band context in concerts)
             {
-                foreach (var band in bandlist.List)
-                {
-                    Console.WriteLine($"{band.Name} {band.PlayGenre} {band.Rate} {band.Musicians.FirstOrDefault().BandRole}");
-                }
-                Console.WriteLine("Complete");
+                foreach(Musician musicians in context.Musicians)
+                Console.WriteLine($"{context.Name} {musicians.Name} {musicians.Surname} {musicians.BandRole.ToString()}");
             }
+            Console.WriteLine("Complete");
             Console.ReadLine();
         }
     }
