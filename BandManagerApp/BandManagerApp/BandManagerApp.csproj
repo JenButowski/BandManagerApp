@@ -59,6 +59,7 @@
     <Compile Include="DataEntities\Song.cs" />
     <Compile Include="DataEntities\Concert.cs" />
     <Compile Include="DataEntities\Tour.cs" />
+    <Compile Include="Engines\TourManager.cs" />
     <Compile Include="Enums\BandRoles.cs" />
     <Compile Include="Enums\DataInstances.cs" />
     <Compile Include="Manager.cs" />

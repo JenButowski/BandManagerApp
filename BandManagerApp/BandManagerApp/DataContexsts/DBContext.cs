@@ -24,33 +24,34 @@ namespace BandManagerApp.DataContexsts
         public DBContext() : base("DBContext")
         { }
 
-        public static dynamic GetInstanceList(DataInstances instance, string sortParams = "Musicians")
-        {
-            try
-            {
-                using (var context = new DBContext())
-                {
-                    switch (instance)
-                    {
-                        case DataInstances.Bands:
-                            return context.Bands.Include(sortParams).ToList();
-                        case DataInstances.Concerts:
-                            return context.Concerts.ToList();
-                        case DataInstances.Musicians:
-                            return context.Musicians.ToList();
-                        case DataInstances.Songs:
-                            return context.Songs.ToList();
-                        case DataInstances.Tours:
-                            return context.Tours.ToList();
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(ex.Message);
-            }
-            return null;
-        }
+        //public static dynamic GetInstanceList(DataInstances instance, string sortParams = "Musicians")
+        //{
+        //    try
+        //    {
+        //        using (var context = new DBContext())
+        //        {
+        //            switch (instance)
+        //            {
+        //                case DataInstances.Bands:
+        //                    var contex = context.Bands.Include(something => something.LastTour).ToList();
+        //                    return contex;
+        //                case DataInstances.Concerts:
+        //                    return context.Concerts.ToList();
+        //                case DataInstances.Musicians:
+        //                    return context.Musicians.ToList();
+        //                case DataInstances.Songs:
+        //                    return context.Songs.ToList();
+        //                case DataInstances.Tours:
+        //                    return context.Tours.Include(sortParams).ToList();
+        //            }
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        Console.ForegroundColor = ConsoleColor.Red;
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //    return null;
+        //}
     }
 }
