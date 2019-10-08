@@ -13,6 +13,9 @@ namespace BandManagerApp
     {
         static void Main(string[] args)
         {
+            TourManager tourManager = new TourManager();
+            tourManager.RemoveTour("The Song");
+
             Console.WriteLine("Complete");
             Console.ReadLine();
         }
