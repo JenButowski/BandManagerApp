@@ -10,23 +10,30 @@ namespace BandManagerApp.Engines
 {
     class TourManager
     {
-        public void AddTour(int id, string name, DateTime startDate, DateTime endDate, List<Concert> concerts, Band band)
+        public void AddTour(Tour tour)
         {
             using (var context = new DBContext())
             {
-                var tour = new Tour() { Id = id, Name = name, StartDate = startDate, EndDate = endDate, Concerts = concerts, Band = band };
                 context.Tours.Add(tour);
                 context.SaveChanges();
             }
         }
 
-        public void RemoveTour(string name)
+        public List<Tour> GetAllTours()
+        {
+            using(var context = new DBContext())
+            {
+                var tours = context.Tours.Include("Concerts").ToList();
+                return tours;
+            }
+        }
+
+        public void RemoveTour(Tour tour)
         {
             try
             {
                 using (var context = new DBContext())
                 {
-                    var tour = context.Tours.Include("Concerts").ToList().Find(something => something.Name == name);
                     RemoveAllRelatedConcerts(tour, context);
                     context.Tours.Remove(tour);
                     context.SaveChanges();
@@ -44,7 +51,6 @@ namespace BandManagerApp.Engines
             {
                 var concerts = context.Concerts.Include("Tour").ToList().Where(something => something.TourId == tour.Id);
                 context.Concerts.RemoveRange(concerts.ToList());
-                context.SaveChanges();
             }
             catch
             {

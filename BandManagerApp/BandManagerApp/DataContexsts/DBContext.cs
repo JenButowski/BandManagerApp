@@ -11,6 +11,8 @@ namespace BandManagerApp.DataContexsts
 {
     public class DBContext : DbContext
     {
+        public DbSet<Manager> Managers { get; set; }
+
         public DbSet<Band> Bands { get; set; }
 
         public DbSet<Musician> Musicians { get; set; }
@@ -23,35 +25,5 @@ namespace BandManagerApp.DataContexsts
 
         public DBContext() : base("DBContext")
         { }
-
-        //public static dynamic GetInstanceList(DataInstances instance, string sortParams = "Musicians")
-        //{
-        //    try
-        //    {
-        //        using (var context = new DBContext())
-        //        {
-        //            switch (instance)
-        //            {
-        //                case DataInstances.Bands:
-        //                    var contex = context.Bands.Include(something => something.LastTour).ToList();
-        //                    return contex;
-        //                case DataInstances.Concerts:
-        //                    return context.Concerts.ToList();
-        //                case DataInstances.Musicians:
-        //                    return context.Musicians.ToList();
-        //                case DataInstances.Songs:
-        //                    return context.Songs.ToList();
-        //                case DataInstances.Tours:
-        //                    return context.Tours.Include(sortParams).ToList();
-        //            }
-        //        }
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        Console.ForegroundColor = ConsoleColor.Red;
-        //        Console.WriteLine(ex.Message);
-        //    }
-        //    return null;
-        //}
     }
 }

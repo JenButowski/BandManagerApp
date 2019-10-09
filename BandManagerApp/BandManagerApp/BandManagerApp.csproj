@@ -59,10 +59,10 @@
     <Compile Include="DataEntities\Song.cs" />
     <Compile Include="DataEntities\Concert.cs" />
     <Compile Include="DataEntities\Tour.cs" />
+    <Compile Include="Engines\ConcertManager.cs" />
+    <Compile Include="Engines\SongManager.cs" />
     <Compile Include="Engines\TourManager.cs" />
     <Compile Include="Enums\BandRoles.cs" />
-    <Compile Include="Enums\DataInstances.cs" />
-    <Compile Include="Manager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
