@@ -13,13 +13,7 @@ namespace BandManagerApp
     {
         static void Main(string[] args)
         {
-            //TourManager tourManager = new TourManager();
-            //tourManager.RemoveTour("The Song");
-
-            using(var context = new DBContext())
-
-            Console.WriteLine("Complete");
-            Console.ReadLine();
+            
         }
     }
 }

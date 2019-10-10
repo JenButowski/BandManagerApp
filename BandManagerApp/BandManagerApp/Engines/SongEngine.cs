@@ -8,31 +8,31 @@ using BandManagerApp.DataContexsts;
 
 namespace BandManagerApp.Engines
 {
-    public class ConcertManager
+    public class SongEngine
     {
-        public List<Concert> GetAllTourConcerts(Tour tour)
+        public List<Song> GetListofSongs(Band band)
         {
             using(var context = new DBContext())
             {
-                var concerts = context.Concerts.Include("Tour").ToList().Where(something => something.TourId == tour.Id);
-                return concerts.ToList();
+                var songs = context.Songs.Include("Band").ToList().Where(something => something.Band.Name == band.Name);
+                return songs.ToList();
             }
         }
 
-        public void AddConcertToTour(Concert concert)
+        public void AddSong(Song song)
         {
-            using (var context = new DBContext())
+            using(var context = new DBContext())
             {
-                context.Concerts.Add(concert);
+                context.Songs.Add(song);
                 context.SaveChanges();
             }
         }
 
-        public void RemoveConcert(Concert concert)
+        public void RemoveSong(Song song)
         {
             using (var context = new DBContext())
             {
-                context.Concerts.Remove(concert);
+                context.Songs.Remove(song);
                 context.SaveChanges();
             }
         }

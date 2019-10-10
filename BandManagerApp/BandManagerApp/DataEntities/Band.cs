@@ -25,5 +25,9 @@ namespace BandManagerApp.DataEntities
         public Tour LastTour { get; set; }
 
         public int Rate { get; set; }
+
+        public int ManagerId { get; set; }
+
+        public Manager Manager { get; set; }
     }
 }

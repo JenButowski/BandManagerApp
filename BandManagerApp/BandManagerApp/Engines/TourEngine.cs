@@ -8,7 +8,7 @@ using BandManagerApp.DataEntities;
 
 namespace BandManagerApp.Engines
 {
-    class TourManager
+    class TourEngine
     {
         public void AddTour(Tour tour)
         {

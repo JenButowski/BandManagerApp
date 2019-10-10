@@ -55,13 +55,15 @@
   <ItemGroup>
     <Compile Include="DataContexsts\DBContext.cs" />
     <Compile Include="DataEntities\Band.cs" />
+    <Compile Include="DataEntities\Manager.cs" />
     <Compile Include="DataEntities\Musician.cs" />
     <Compile Include="DataEntities\Song.cs" />
     <Compile Include="DataEntities\Concert.cs" />
     <Compile Include="DataEntities\Tour.cs" />
-    <Compile Include="Engines\ConcertManager.cs" />
-    <Compile Include="Engines\SongManager.cs" />
-    <Compile Include="Engines\TourManager.cs" />
+    <Compile Include="Engines\ConcertEngine.cs" />
+    <Compile Include="Engines\ManagerEngine.cs" />
+    <Compile Include="Engines\SongEngine.cs" />
+    <Compile Include="Engines\TourEngine.cs" />
     <Compile Include="Enums\BandRoles.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
