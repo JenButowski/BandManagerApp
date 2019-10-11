@@ -19,12 +19,20 @@ namespace BandManagerApp.Engines
             }
         }
 
-        public void AddConcertToTour(Concert concert)
+        public bool AddConcertToTour(Concert concert)
         {
-            using (var context = new DBContext())
+            try
             {
-                context.Concerts.Add(concert);
-                context.SaveChanges();
+                using (var context = new DBContext())
+                {
+                    context.Concerts.Add(concert);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
 

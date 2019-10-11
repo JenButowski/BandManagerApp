@@ -19,11 +19,11 @@ namespace BandManagerApp.Engines
             }
         }
 
-        public Band GetBand(Manager manager, string name)
+        public Band GetBandbyName(string name)
         {
             using (var context = new DBContext())
             {
-                var band = context.Bands.Include("Manager").ToList().Where(something => something.ManagerId == manager.Id && something.Name == name).First();
+                var band = context.Bands.Include("Songs").ToList().Where(something => something.Name == name).LastOrDefault();
                 return band;
             }
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BandManagerApp.DataContexsts;
 using BandManagerApp.DataEntities;
 using BandManagerApp.Engines;
+using BandManagerApp.GUIs.ConsoleGUI;
 
 namespace BandManagerApp
 {
@@ -13,7 +14,12 @@ namespace BandManagerApp
     {
         static void Main(string[] args)
         {
-            
+            ConsoleGraphic consoleGraphic = new ConsoleGraphic();
+            ConcertEngine concertEngine = new ConcertEngine();
+            TourEngine tourEngine = new TourEngine();
+
+            consoleGraphic.PrintConcerts(concertEngine, tourEngine.GetAllTours().Last());
+            Console.ReadLine();
         }
     }
 }

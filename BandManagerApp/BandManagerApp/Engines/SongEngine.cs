@@ -19,12 +19,20 @@ namespace BandManagerApp.Engines
             }
         }
 
-        public void AddSong(Song song)
+        public bool AddSong(Song song)
         {
-            using(var context = new DBContext())
+            try
             {
-                context.Songs.Add(song);
-                context.SaveChanges();
+                using (var context = new DBContext())
+                {
+                    context.Songs.Add(song);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
 
@@ -34,6 +42,25 @@ namespace BandManagerApp.Engines
             {
                 context.Songs.Remove(song);
                 context.SaveChanges();
+            }
+        }
+
+        public Song GetSongbyName(string songName)
+        {
+            using(var context = new DBContext())
+            {
+                var songs = context.Songs.Include("Band").ToList();
+                var song = songs.Where(something => something.Name == songName).LastOrDefault();
+                return song;
+            }
+        }
+
+        public List<Song> GetSongsbyBand(Band band)
+        {
+            using(var context = new DBContext())
+            {
+                var songs = context.Songs.Include("Band").ToList().Where(something => something.Band.Name == band.Name);
+                return songs.ToList();
             }
         }
     }

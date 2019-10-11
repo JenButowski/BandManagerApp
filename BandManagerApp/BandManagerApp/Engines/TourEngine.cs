@@ -19,6 +19,15 @@ namespace BandManagerApp.Engines
             }
         }
 
+        public Tour GetTourbyName(string name)
+        {
+            using(var context = new DBContext())
+            {
+                var tour = context.Tours.Include("Concerts").ToList().Where(something => something.Name == name).LastOrDefault();
+                return tour;
+            }
+        }
+
         public List<Tour> GetAllTours()
         {
             using(var context = new DBContext())
