@@ -9,14 +9,17 @@ using System.Threading.Tasks;
 namespace BandManagerApp.Engines
 {
     class ManagerEngine
-    {
-        public List<Manager> Managers()
+    {     
+        public bool CheckManagerData(string login, string password)
         {
-            using(var context = new DBContext())
+            var managers = GetManagers();
+
+            foreach(var manager in managers)
             {
-                var managers = context.Managers.Include("Bands").ToList();
-                return managers;
+                if (manager.Login == login && manager.Password == password)
+                    return true;
             }
+            return false;
         }
 
         public void AddManager(Manager manager)
@@ -25,6 +28,15 @@ namespace BandManagerApp.Engines
             {
                 context.Managers.Add(manager);
                 context.SaveChanges();
+            }
+        }
+
+        public List<Manager> GetManagers()
+        {
+            using (var context = new DBContext())
+            {
+                var managers = context.Managers.Include("Bands").ToList();
+                return managers;
             }
         }
     }

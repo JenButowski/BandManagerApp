@@ -60,11 +60,13 @@
     <Compile Include="DataEntities\Song.cs" />
     <Compile Include="DataEntities\Concert.cs" />
     <Compile Include="DataEntities\Tour.cs" />
+    <Compile Include="Engines\BandEngine.cs" />
     <Compile Include="Engines\ConcertEngine.cs" />
     <Compile Include="Engines\ManagerEngine.cs" />
     <Compile Include="Engines\SongEngine.cs" />
     <Compile Include="Engines\TourEngine.cs" />
     <Compile Include="Enums\BandRoles.cs" />
+    <Compile Include="GUIs\ConsoleGUI\ConsoleGraphic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
