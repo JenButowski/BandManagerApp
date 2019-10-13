@@ -10,10 +10,8 @@ namespace BandManagerApp.GUIs.ConsoleGUI
 {
     class ConsoleGraphic
     {
-        public bool PrintUserLogForm(ManagerEngine managerEngine)
+        public Manager PrintUserLogForm(ManagerEngine managerEngine)
         {
-            Console.WriteLine("Band Manager v 1.0");
-            Console.WriteLine();
             Console.WriteLine("Введите логин :");
             string login = Console.ReadLine();
             Console.WriteLine("Введите пароль :");
@@ -25,7 +23,6 @@ namespace BandManagerApp.GUIs.ConsoleGUI
         {
             var bands = bandEngine.GetBands(manager);
             int counter = 2;
-            Console.WriteLine("Группы :");
 
             foreach (var band in bands)
             {
@@ -47,34 +44,12 @@ namespace BandManagerApp.GUIs.ConsoleGUI
             }
         }
 
-        public void PrintConcerts(ConcertEngine concertEngine, Tour tour)
+        public void AddConcerttoTour(ConcertEngine concertEngine, TourEngine tourEngine)
         {
-            var concerts = concertEngine.GetAllTourConcerts(tour);
-            int counter = 2;
-            Console.WriteLine("Концерты :");
-
-            foreach (var concert in concerts)
-            {
-                if (counter % 2 == 0)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"{concert.City} {concert.StartDate.ToString()} {concert.StartDate.ToString()}");
-                    Console.ResetColor();
-                    Console.WriteLine();
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"{concert.City} {concert.StartDate.ToString()} {concert.StartDate.ToString()}");
-                    Console.ResetColor();
-                    Console.WriteLine();
-                }
-                counter++;
-            }
-        }
-
-        public void AddConcerttoTour(ConcertEngine concertEngine, Tour tour)
-        {
+            Console.WriteLine("Введите название тура :");
+            string tourName = Console.ReadLine();
+            var tour = tourEngine.GetTourbyName(tourName);
+            Console.WriteLine();
             Console.WriteLine($"Создание концерта в {tour.Name}");
             Console.WriteLine("Введите город :");
             string city = Console.ReadLine();
@@ -97,7 +72,7 @@ namespace BandManagerApp.GUIs.ConsoleGUI
             var song = songEngine.GetSongbyName(name);
 
             if (song != null)
-                Console.WriteLine($"{song.Name} {song.Band.Name} {song.MusicAuthor} {song.TextAuthor} {song.IssueDate.ToString()}");
+                Console.WriteLine($"{song.Name} {song.Band.Name} {song.MusicAuthor} {song.TextAuthor} {song.IssueDate.ToString("yyyy/MM/dd")}");
             else
                 Console.WriteLine("Такой песни не существует");
         }
@@ -116,14 +91,14 @@ namespace BandManagerApp.GUIs.ConsoleGUI
                 if (counter % 2 == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"{song.Name} {song.Band.Name} {song.MusicAuthor} {song.TextAuthor} {song.IssueDate.ToString()}");
+                    Console.WriteLine($"{song.Name} {song.Band.Name} {song.MusicAuthor} {song.TextAuthor} {song.IssueDate.ToString("yyyy/MM/dd")}");
                     Console.ResetColor();
                     Console.WriteLine();
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"{song.Name} {song.Band.Name} {song.MusicAuthor} {song.TextAuthor} {song.IssueDate.ToString()}");
+                    Console.WriteLine($"{song.Name} {song.Band.Name} {song.MusicAuthor} {song.TextAuthor} {song.IssueDate.ToString("yyyy/MM/dd")}");
                     Console.ResetColor();
                     Console.WriteLine();
                 }
@@ -133,31 +108,38 @@ namespace BandManagerApp.GUIs.ConsoleGUI
 
         public void PrintTourInfo(TourEngine tourEngine)
         {
-            Console.WriteLine("Введите название тура :");
-            string tourName = Console.ReadLine();
-            var tour = tourEngine.GetTourbyName(tourName);
-            int counter = 2;
-            Console.WriteLine($"{tour.Name} {tour.StartDate.ToString("yyyy/MM/dd")} {tour.StartDate.ToString("yyyy/MM/dd")}");
-            Console.WriteLine();
-            Console.WriteLine("Концерты тура :");
-
-            foreach (var concert in tour.Concerts)
+            try
             {
-                if (counter % 2 == 0)
+                Console.WriteLine("Введите название тура :");
+                string tourName = Console.ReadLine();
+                var tour = tourEngine.GetTourbyName(tourName);
+                int counter = 2;
+                Console.WriteLine($"{tour.Name} {tour.StartDate.ToString("yyyy/MM/dd")} {tour.StartDate.ToString("yyyy/MM/dd")}");
+                Console.WriteLine();
+                Console.WriteLine("Концерты тура :");
+
+                foreach (var concert in tour.Concerts)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"{concert.City} {concert.StartDate} {concert.EndDate}");
-                    Console.ResetColor();
-                    Console.WriteLine();
+                    if (counter % 2 == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine($"{concert.City} {concert.StartDate} {concert.EndDate}");
+                        Console.ResetColor();
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine($"{concert.City} {concert.StartDate} {concert.EndDate}");
+                        Console.ResetColor();
+                        Console.WriteLine();
+                    }
+                    counter++;
                 }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"{concert.City} {concert.StartDate} {concert.EndDate}");
-                    Console.ResetColor();
-                    Console.WriteLine();
-                }
-                counter++;
+            }
+            catch
+            {
+                Console.WriteLine("Тур с таким названием не существует");
             }
         }
 
@@ -183,10 +165,36 @@ namespace BandManagerApp.GUIs.ConsoleGUI
                 IssueDate = DateTime.Parse(issueDate),
                 BandId = band.Id
             };
+
             if(songEngine.AddSong(song) != false)
                 Console.WriteLine("Песня добавлена");
             else
                 Console.WriteLine("Ошибка добавления");
+        }
+
+        public void PritDeedList(Dictionary<int,string> deedList)
+        {
+            int counter = 2;
+            Console.WriteLine("Список действий :");
+
+            foreach(var deed in deedList)
+            {
+                if (counter % 2 == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine($"{deed.Value} - {deed.Key}");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine($"{deed.Value} - {deed.Key}");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                }
+                counter++;
+            }
         }
     }
 }

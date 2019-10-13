@@ -23,7 +23,7 @@ namespace BandManagerApp.Engines
         {
             using(var context = new DBContext())
             {
-                var tour = context.Tours.Include("Concerts").ToList().Where(something => something.Name == name).LastOrDefault();
+                var tour = context.Tours.Include("Concerts").ToList().Where(something => something.Name == name).Last();
                 return tour;
             }
         }
@@ -49,9 +49,7 @@ namespace BandManagerApp.Engines
                 }
             }
             catch
-            {
-                Console.WriteLine("Problems with removing tour");
-            }
+            { }
         }
 
         private void RemoveAllRelatedConcerts(Tour tour, DBContext context)
@@ -62,9 +60,7 @@ namespace BandManagerApp.Engines
                 context.Concerts.RemoveRange(concerts.ToList());
             }
             catch
-            {
-                Console.WriteLine("Problems with removing related concerts");
-            }
+            { }
         }
     }
 }

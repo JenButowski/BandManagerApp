@@ -10,16 +10,16 @@ namespace BandManagerApp.Engines
 {
     class ManagerEngine
     {     
-        public bool CheckManagerData(string login, string password)
+        public Manager CheckManagerData(string login, string password)
         {
             var managers = GetManagers();
 
             foreach(var manager in managers)
             {
                 if (manager.Login == login && manager.Password == password)
-                    return true;
+                    return manager;
             }
-            return false;
+            return null;
         }
 
         public void AddManager(Manager manager)
