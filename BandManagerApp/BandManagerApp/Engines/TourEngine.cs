@@ -10,43 +10,31 @@ namespace BandManagerApp.Engines
 {
     class TourEngine
     {
-        public void AddTour(Tour tour)
+        public void AddTour(DBContext context, Tour tour)
         {
-            using (var context = new DBContext())
-            {
-                context.Tours.Add(tour);
-                context.SaveChanges();
-            }
+            context.Tours.Add(tour);
+            context.SaveChanges();
         }
 
-        public Tour GetTourbyName(string name)
+        public Tour GetTourbyName(DBContext context, string name)
         {
-            using(var context = new DBContext())
-            {
-                var tour = context.Tours.Include("Concerts").ToList().Where(something => something.Name == name).Last();
-                return tour;
-            }
+            var tour = context.Tours.Include("Concerts").ToList().Where(something => something.Name == name).Last();
+            return tour;
         }
 
-        public List<Tour> GetAllTours()
+        public List<Tour> GetAllTours(DBContext context)
         {
-            using(var context = new DBContext())
-            {
-                var tours = context.Tours.Include("Concerts").ToList();
-                return tours;
-            }
+            var tours = context.Tours.Include("Concerts").ToList();
+            return tours;
         }
 
-        public void RemoveTour(Tour tour)
+        public void RemoveTour(DBContext context, Tour tour)
         {
             try
             {
-                using (var context = new DBContext())
-                {
-                    RemoveAllRelatedConcerts(tour, context);
-                    context.Tours.Remove(tour);
-                    context.SaveChanges();
-                }
+                RemoveAllRelatedConcerts(tour, context);
+                context.Tours.Remove(tour);
+                context.SaveChanges();
             }
             catch
             { }

@@ -38,11 +38,10 @@ namespace BandManagerApp
 
         static void Main(string[] args)
         {
-            Console.WriteLine("BandManager v 1.0");
+        ProgStart:
 
-            ProgStart:
-
-            var manager = consoleGraphic.PrintUserLogForm(managerEngine);
+            var context = new DBContext();
+            var manager = consoleGraphic.PrintUserLogForm(context, managerEngine);
 
             if (manager != null)
             {
@@ -52,57 +51,52 @@ namespace BandManagerApp
                 Console.ResetColor();
                 Console.WriteLine();
 
-                DeedMenu:
+            DeedMenu:
 
                 Console.Clear();
                 consoleGraphic.PritDeedList(deedsList);
 
                 int deedValue = int.Parse(Console.ReadLine());
 
-                switch(deedValue)
+                switch (deedValue)
                 {
                     case 0:
                         Console.Clear();
                         Console.WriteLine($"{deedsList[deedValue]} :");
-                        consoleGraphic.PrintBands(bandEngine, manager);
-                        Console.WriteLine();
+                        consoleGraphic.PrintBands(context, bandEngine, manager);
                         Console.WriteLine("Нажмите любую кнопку чтобы перейти в меню");
                         Console.ReadLine();
                         goto DeedMenu;
                     case 1:
                         Console.Clear();
-                        consoleGraphic.PrintTourInfo(tourEngine);
-                        Console.WriteLine();
+                        consoleGraphic.PrintTourInfo(context, tourEngine);
                         Console.WriteLine("Нажмите любую кнопку чтобы перейти в меню");
                         Console.ReadLine();
                         goto DeedMenu;
                     case 2:
                         Console.Clear();
                         Console.WriteLine($"{deedsList[deedValue]} :");
-                        consoleGraphic.AddConcerttoTour(concertEngine, tourEngine);
-                        Console.WriteLine();
+                        consoleGraphic.AddConcerttoTour(context, concertEngine, tourEngine);
                         Console.WriteLine("Нажмите любую кнопку чтобы перейти в меню");
                         Console.ReadLine();
                         goto DeedMenu;
                     case 3:
                         Console.Clear();
                         Console.WriteLine($"{deedsList[deedValue]} :");
-                        consoleGraphic.PrintBandSongs(songEngine, bandEngine);
-                        Console.WriteLine();
+                        consoleGraphic.PrintBandSongs(context, songEngine, bandEngine);
                         Console.WriteLine("Нажмите любую кнопку чтобы перейти в меню");
                         Console.ReadLine();
                         goto DeedMenu;
                     case 4:
                         Console.Clear();
                         Console.WriteLine($"{deedsList[deedValue]} :");
-                        consoleGraphic.PrintSongInfobyName(songEngine);
-                        Console.WriteLine();
+                        consoleGraphic.PrintSongInfobyName(context, songEngine);
                         Console.WriteLine("Нажмите любую кнопку чтобы перейти в меню");
                         Console.ReadLine();
                         goto DeedMenu;
                     case 5:
                         Console.Clear();
-                        consoleGraphic.PrintFormtoAddSong(songEngine, bandEngine);
+                        consoleGraphic.PrintFormtoAddSong(context, songEngine, bandEngine);
                         Console.WriteLine();
                         Console.WriteLine("Нажмите любую кнопку чтобы перейти в меню");
                         Console.ReadLine();

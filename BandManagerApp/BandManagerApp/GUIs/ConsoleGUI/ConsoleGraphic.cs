@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BandManagerApp.DataContexsts;
 using BandManagerApp.DataEntities;
 using BandManagerApp.Engines;
 
@@ -10,18 +11,18 @@ namespace BandManagerApp.GUIs.ConsoleGUI
 {
     class ConsoleGraphic
     {
-        public Manager PrintUserLogForm(ManagerEngine managerEngine)
+        public Manager PrintUserLogForm(DBContext context, ManagerEngine managerEngine)
         {
             Console.WriteLine("Введите логин :");
             string login = Console.ReadLine();
             Console.WriteLine("Введите пароль :");
             string password = Console.ReadLine();
-            return managerEngine.CheckManagerData(login, password);
+            return managerEngine.CheckManagerData(context, login, password);
         }
 
-        public void PrintBands(BandEngine bandEngine, Manager manager)
+        public void PrintBands(DBContext context, BandEngine bandEngine, Manager manager)
         {
-            var bands = bandEngine.GetBands(manager);
+            var bands = bandEngine.GetBands(context, manager);
             int counter = 2;
 
             foreach (var band in bands)
@@ -44,11 +45,11 @@ namespace BandManagerApp.GUIs.ConsoleGUI
             }
         }
 
-        public void AddConcerttoTour(ConcertEngine concertEngine, TourEngine tourEngine)
+        public void AddConcerttoTour(DBContext context, ConcertEngine concertEngine, TourEngine tourEngine)
         {
             Console.WriteLine("Введите название тура :");
             string tourName = Console.ReadLine();
-            var tour = tourEngine.GetTourbyName(tourName);
+            var tour = tourEngine.GetTourbyName(context, tourName);
             Console.WriteLine();
             Console.WriteLine($"Создание концерта в {tour.Name}");
             Console.WriteLine("Введите город :");
@@ -59,17 +60,17 @@ namespace BandManagerApp.GUIs.ConsoleGUI
             string endDate = Console.ReadLine();
             var concert = new Concert { City = city, StartDate = DateTime.Parse(startDate), EndDate = DateTime.Parse(endDate), TourId = tour.Id };
 
-            if (concertEngine.AddConcertToTour(concert) != false)
+            if (concertEngine.AddConcertToTour(context, concert) != false)
                 Console.WriteLine("Коцерт добавлен");
             else
                 Console.WriteLine("Произошла ошибка; Концерт не добавлен");
         }
 
-        public void PrintSongInfobyName(SongEngine songEngine)
+        public void PrintSongInfobyName(DBContext context, SongEngine songEngine)
         {
             Console.WriteLine("Введите имя композиции :");
             string name = Console.ReadLine();
-            var song = songEngine.GetSongbyName(name);
+            var song = songEngine.GetSongbyName(context, name);
 
             if (song != null)
                 Console.WriteLine($"{song.Name} {song.Band.Name} {song.MusicAuthor} {song.TextAuthor} {song.IssueDate.ToString("yyyy/MM/dd")}");
@@ -77,12 +78,12 @@ namespace BandManagerApp.GUIs.ConsoleGUI
                 Console.WriteLine("Такой песни не существует");
         }
 
-        public void PrintBandSongs(SongEngine songEngine, BandEngine bandEngine)
+        public void PrintBandSongs(DBContext context, SongEngine songEngine, BandEngine bandEngine)
         {
             Console.WriteLine("Введите название группы");
             string bandName = Console.ReadLine();
-            var band = bandEngine.GetBandbyName(bandName);
-            var songs = songEngine.GetSongsbyBand(band);
+            var band = bandEngine.GetBandbyName(context, bandName);
+            var songs = songEngine.GetSongsbyBand(context, band);
             int counter = 2;
             Console.WriteLine($"Список песен {band.Name} :");
 
@@ -106,13 +107,13 @@ namespace BandManagerApp.GUIs.ConsoleGUI
             }
         }
 
-        public void PrintTourInfo(TourEngine tourEngine)
+        public void PrintTourInfo(DBContext context, TourEngine tourEngine)
         {
             try
             {
                 Console.WriteLine("Введите название тура :");
                 string tourName = Console.ReadLine();
-                var tour = tourEngine.GetTourbyName(tourName);
+                var tour = tourEngine.GetTourbyName(context, tourName);
                 int counter = 2;
                 Console.WriteLine($"{tour.Name} {tour.StartDate.ToString("yyyy/MM/dd")} {tour.StartDate.ToString("yyyy/MM/dd")}");
                 Console.WriteLine();
@@ -143,11 +144,11 @@ namespace BandManagerApp.GUIs.ConsoleGUI
             }
         }
 
-        public void PrintFormtoAddSong(SongEngine songEngine, BandEngine bandEngine)
+        public void PrintFormtoAddSong(DBContext context, SongEngine songEngine, BandEngine bandEngine)
         {
             Console.WriteLine("Введите название группы :");
             string bandName = Console.ReadLine();
-            var band = bandEngine.GetBandbyName(bandName);
+            var band = bandEngine.GetBandbyName(context, bandName);
             Console.WriteLine($"Создание песни в {band.Name}");
             Console.WriteLine("Введите имя песни :");
             string name = Console.ReadLine();
@@ -166,18 +167,18 @@ namespace BandManagerApp.GUIs.ConsoleGUI
                 BandId = band.Id
             };
 
-            if(songEngine.AddSong(song) != false)
+            if (songEngine.AddSong(context, song) != false)
                 Console.WriteLine("Песня добавлена");
             else
                 Console.WriteLine("Ошибка добавления");
         }
 
-        public void PritDeedList(Dictionary<int,string> deedList)
+        public void PritDeedList(Dictionary<int, string> deedList)
         {
             int counter = 2;
             Console.WriteLine("Список действий :");
 
-            foreach(var deed in deedList)
+            foreach (var deed in deedList)
             {
                 if (counter % 2 == 0)
                 {

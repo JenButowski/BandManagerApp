@@ -10,31 +10,22 @@ namespace BandManagerApp.Engines
 {
     public class BandEngine
     {
-        public List<Band> GetBands(Manager manager)
+        public List<Band> GetBands(DBContext context, Manager manager)
         {
-            using (var context = new DBContext())
-            {
-                var bands = context.Bands.Include("Manager").ToList().Where(something => something.ManagerId == manager.Id);
-                return bands.ToList();
-            }
+            var bands = context.Bands.Include("Manager").ToList().Where(something => something.ManagerId == manager.Id);
+            return bands.ToList();
         }
 
-        public Band GetBandbyName(string name)
+        public Band GetBandbyName(DBContext context, string name)
         {
-            using (var context = new DBContext())
-            {
-                var band = context.Bands.Include("Songs").ToList().Where(something => something.Name == name).LastOrDefault();
-                return band;
-            }
+            var band = context.Bands.Include("Songs").ToList().Where(something => something.Name == name).LastOrDefault();
+            return band;
         }
 
-        public void AddBand(Band band)
+        public void AddBand(DBContext context, Band band)
         {
-            using (var context = new DBContext())
-            {
-                context.Bands.Add(band);
-                context.SaveChanges();
-            }
+            context.Bands.Add(band);
+            context.SaveChanges();
         }
     }
 }

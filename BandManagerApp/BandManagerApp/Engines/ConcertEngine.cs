@@ -10,25 +10,19 @@ namespace BandManagerApp.Engines
 {
     public class ConcertEngine
     {
-        public List<Concert> GetAllTourConcerts(Tour tour)
+        public List<Concert> GetAllTourConcerts(DBContext context, Tour tour)
         {
-            using(var context = new DBContext())
-            {
-                var concerts = context.Concerts.Include("Tour").ToList().Where(something => something.TourId == tour.Id);
-                return concerts.ToList();
-            }
+            var concerts = context.Concerts.Include("Tour").ToList().Where(something => something.TourId == tour.Id);
+            return concerts.ToList();
         }
 
-        public bool AddConcertToTour(Concert concert)
+        public bool AddConcertToTour(DBContext context, Concert concert)
         {
             try
             {
-                using (var context = new DBContext())
-                {
-                    context.Concerts.Add(concert);
-                    context.SaveChanges();
-                    return true;
-                }
+                context.Concerts.Add(concert);
+                context.SaveChanges();
+                return true;
             }
             catch
             {
@@ -36,13 +30,11 @@ namespace BandManagerApp.Engines
             }
         }
 
-        public void RemoveConcert(Concert concert)
+        public void RemoveConcert(DBContext context, Concert concert)
         {
-            using (var context = new DBContext())
-            {
-                context.Concerts.Remove(concert);
-                context.SaveChanges();
-            }
+
+            context.Concerts.Remove(concert);
+            context.SaveChanges();
         }
     }
 }

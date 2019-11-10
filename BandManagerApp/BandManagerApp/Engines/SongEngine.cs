@@ -10,25 +10,19 @@ namespace BandManagerApp.Engines
 {
     public class SongEngine
     {
-        public List<Song> GetListofSongs(Band band)
+        public List<Song> GetListofSongs(DBContext context, Band band)
         {
-            using(var context = new DBContext())
-            {
-                var songs = context.Songs.Include("Band").ToList().Where(something => something.Band.Name == band.Name);
-                return songs.ToList();
-            }
+            var songs = context.Songs.Include("Band").ToList().Where(something => something.Band.Name == band.Name);
+            return songs.ToList();
         }
 
-        public bool AddSong(Song song)
+        public bool AddSong(DBContext context, Song song)
         {
             try
             {
-                using (var context = new DBContext())
-                {
-                    context.Songs.Add(song);
-                    context.SaveChanges();
-                    return true;
-                }
+                context.Songs.Add(song);
+                context.SaveChanges();
+                return true;
             }
             catch
             {
@@ -36,32 +30,24 @@ namespace BandManagerApp.Engines
             }
         }
 
-        public void RemoveSong(Song song)
+        public void RemoveSong(DBContext context, Song song)
         {
-            using (var context = new DBContext())
-            {
-                context.Songs.Remove(song);
-                context.SaveChanges();
-            }
+            context.Songs.Remove(song);
+            context.SaveChanges();
         }
 
-        public Song GetSongbyName(string songName)
+        public Song GetSongbyName(DBContext context, string songName)
         {
-            using(var context = new DBContext())
-            {
-                var songs = context.Songs.Include("Band").ToList();
-                var song = songs.Where(something => something.Name == songName).LastOrDefault();
-                return song;
-            }
+            var songs = context.Songs.Include("Band").ToList();
+            var song = songs.Where(something => something.Name == songName).LastOrDefault();
+            return song;
         }
 
-        public List<Song> GetSongsbyBand(Band band)
+        public List<Song> GetSongsbyBand(DBContext context, Band band)
         {
-            using(var context = new DBContext())
-            {
-                var songs = context.Songs.Include("Band").ToList().Where(something => something.Band.Name == band.Name);
-                return songs.ToList();
-            }
+
+            var songs = context.Songs.Include("Band").ToList().Where(something => something.Band.Name == band.Name);
+            return songs.ToList();
         }
     }
 }
