@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandManagerApp", "BandManagerApp\BandManagerApp.csproj", "{3FF6825A-EA90-4D67-BF00-B1C63E930398}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{F718681A-449A-4123-8DCA-6DC9543B66AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3FF6825A-EA90-4D67-BF00-B1C63E930398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FF6825A-EA90-4D67-BF00-B1C63E930398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FF6825A-EA90-4D67-BF00-B1C63E930398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F718681A-449A-4123-8DCA-6DC9543B66AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F718681A-449A-4123-8DCA-6DC9543B66AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F718681A-449A-4123-8DCA-6DC9543B66AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F718681A-449A-4123-8DCA-6DC9543B66AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

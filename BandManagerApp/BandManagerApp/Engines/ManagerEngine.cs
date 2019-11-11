@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BandManagerApp.Engines
 {
-    class ManagerEngine
+    public class ManagerEngine
     {
         public Manager CheckManagerData(DBContext context, string login, string password)
         {
