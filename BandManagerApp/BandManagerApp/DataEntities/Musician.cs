@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,8 @@ namespace BandManagerApp.DataEntities
 
         public BandRoles BandRole { get; set; }
 
-        public int? BandId { get; set; }
+        [ForeignKey("Band")]
+        public string BandName { get; set; }
 
         public Band Band { get; set; }
     }

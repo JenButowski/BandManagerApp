@@ -58,7 +58,7 @@ namespace BandManagerApp.GUIs.ConsoleGUI
             string startDate = Console.ReadLine();
             Console.WriteLine("Введите время окончания концерта :");
             string endDate = Console.ReadLine();
-            var concert = new Concert { City = city, StartDate = DateTime.Parse(startDate), EndDate = DateTime.Parse(endDate), TourId = tour.Id };
+            var concert = new Concert { City = city, StartDate = DateTime.Parse(startDate), EndDate = DateTime.Parse(endDate), Tour = tour };
 
             if (concertEngine.AddConcertToTour(context, concert) != false)
                 Console.WriteLine("Коцерт добавлен");
@@ -164,7 +164,7 @@ namespace BandManagerApp.GUIs.ConsoleGUI
                 MusicAuthor = musicAuthorName,
                 TextAuthor = textAuthorName,
                 IssueDate = DateTime.Parse(issueDate),
-                BandId = band.Id
+                Band = band
             };
 
             if (songEngine.AddSong(context, song) != false)

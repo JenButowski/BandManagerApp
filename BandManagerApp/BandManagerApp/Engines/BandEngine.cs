@@ -12,7 +12,7 @@ namespace BandManagerApp.Engines
     {
         public List<Band> GetBands(DBContext context, Manager manager)
         {
-            var bands = context.Bands.Include("Manager").ToList().Where(something => something.ManagerId == manager.Id);
+            var bands = context.Bands.Include("Manager").ToList().Where(something => something.Manager.Id == manager.Id);
             return bands.ToList();
         }
 

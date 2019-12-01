@@ -18,7 +18,7 @@ namespace BandManagerApp.Engines
 
         public Tour GetTourbyName(DBContext context, string name)
         {
-            var tour = context.Tours.Include("Concerts").ToList().Where(something => something.Name == name).Last();
+            var tour = context.Tours.Include("Concerts").ToList().Where(something => something.Name == name).First();
             return tour;
         }
 
@@ -44,7 +44,7 @@ namespace BandManagerApp.Engines
         {
             try
             {
-                var concerts = context.Concerts.Include("Tour").ToList().Where(something => something.TourId == tour.Id);
+                var concerts = context.Concerts.Include("Tour").ToList().Where(something => something.Tour.Name == tour.Name);
                 context.Concerts.RemoveRange(concerts.ToList());
             }
             catch

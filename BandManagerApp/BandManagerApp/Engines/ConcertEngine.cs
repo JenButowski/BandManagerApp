@@ -12,7 +12,7 @@ namespace BandManagerApp.Engines
     {
         public List<Concert> GetAllTourConcerts(DBContext context, Tour tour)
         {
-            var concerts = context.Concerts.Include("Tour").ToList().Where(something => something.TourId == tour.Id);
+            var concerts = context.Concerts.Include("Tour").ToList().Where(something => something.Tour.Name == tour.Name);
             return concerts.ToList();
         }
 
